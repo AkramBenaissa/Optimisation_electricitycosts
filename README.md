@@ -62,27 +62,32 @@ Hourly absolute price changes are used instead of percentage returns because ele
 
 ### 1. Minimum-Variance Optimization
 
-The model considers DK1 as the main electricity price exposure and the four neighboring markets as potential proxy hedges.
+The objective is to minimize DK1 electricity price risk using four neighboring markets: DE, DK2, NO2, and SE4.
 
-The hedged price change is defined as:
+The hedged hourly price change is defined as:
 
-\[
-\Delta P_{H,t}=\Delta P_{DK1,t}-\sum_{i=1}^{4}w_i\Delta P_{i,t}
-\]
+$$
+\Delta P_{H,t} = \Delta P_{DK1,t} - \sum_{i=1}^{4} w_i \Delta P_{i,t}
+$$
 
-The objective is to minimize the variance of the hedged exposure:
+where:
+- $\Delta P_{DK1,t}$ represents the hourly price change in DK1.
+- $\Delta P_{i,t}$ represents the hourly price change in market $i$.
+- $w_i$ represents the optimal hedge weight assigned to market $i$.
 
-\[
-\min_w \operatorname{Var}(\Delta P_{H,t})
-\]
+The optimization problem is:
 
-Subject to:
+$$
+\begin{aligned}
+\min_{\mathbf{w}} \quad & \operatorname{Var}\left(\Delta P_{DK1,t} - \sum_{i=1}^{4} w_i \Delta P_{i,t}\right) \\
+\text{subject to} \quad & 0 \leq w_i \leq 1, \quad i=1,\ldots,4 \\
+& \sum_{i=1}^{4} w_i \leq 1
+\end{aligned}
+$$
 
-\[
-0\leq w_i\leq1,\qquad \sum_{i=1}^{4}w_i\leq1
-\]
+The model uses the **Sequential Least Squares Programming (SLSQP)** algorithm from SciPy to estimate the optimal hedge weights.
 
-The optimization is performed using SciPy's SLSQP algorithm.
+The resulting weights minimize the variance of DK1's residual hourly price changes, subject to non-negative weights and a maximum total hedge exposure of 100%.
 
 ### 2. Train-Test Split
 
