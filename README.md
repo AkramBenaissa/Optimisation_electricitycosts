@@ -106,12 +106,15 @@ The observations are divided chronologically into:
 
 Hedging effectiveness is measured by the percentage reduction in variance:
 
-\[
-HE= \left(1-\frac{\operatorname{Var}(\Delta P_H)}
-{\operatorname{Var}(\Delta P_{DK1})}\right)\times100
-\]
+$$
+HE = \left(1 - \frac{\mathrm{Var}(\Delta P_H)}{\mathrm{Var}(\Delta P_{DK1})}\right) \times 100
+$$
 
-A higher percentage indicates a greater reduction in hourly price-change variance.
+where:
+- $\mathrm{Var}(\Delta P_H)$ is the variance of the hedged hourly price changes.
+- $\mathrm{Var}(\Delta P_{DK1})$ is the variance of the unhedged DK1 hourly price changes.
+
+A higher percentage indicates a greater reduction in hourly price-change variance. A value of 100% represents complete elimination of variance, while 0% indicates no reduction. Negative values indicate that the hedge increases variance.
 
 ## Results
 
