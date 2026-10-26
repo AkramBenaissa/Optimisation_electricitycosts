@@ -73,19 +73,25 @@ $$
 where:
 - $\Delta P_{DK1,t}$ represents the hourly price change in DK1.
 - $\Delta P_{i,t}$ represents the hourly price change in market $i$.
-- $w_i$ represents the optimal hedge weight assigned to market $i$.
+- $w_i$ represents the hedge weight assigned to market $i$.
 
 The optimization problem is:
 
 $$
-\begin{aligned}
-\min_{\mathbf{w}} \quad & \operatorname{Var}\left(\Delta P_{DK1,t} - \sum_{i=1}^{4} w_i \Delta P_{i,t}\right) \\
-\text{subject to} \quad & 0 \leq w_i \leq 1, \quad i=1,\ldots,4 \\
-& \sum_{i=1}^{4} w_i \leq 1
-\end{aligned}
+\min_{\mathbf{w}} \; \mathrm{Var}\left(\Delta P_{DK1,t} - \sum_{i=1}^{4} w_i \Delta P_{i,t}\right)
 $$
 
-The model uses the **Sequential Least Squares Programming (SLSQP)** algorithm from SciPy to estimate the optimal hedge weights.
+Subject to:
+
+$$
+0 \leq w_i \leq 1
+$$
+
+$$
+\sum_{i=1}^{4} w_i \leq 1
+$$
+
+The optimization is performed using the **Sequential Least Squares Programming (SLSQP)** algorithm from SciPy.
 
 The resulting weights minimize the variance of DK1's residual hourly price changes, subject to non-negative weights and a maximum total hedge exposure of 100%.
 
