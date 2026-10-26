@@ -132,11 +132,11 @@ These results demonstrate strong historical statistical risk reduction, although
 
 ## Python Implementation
 
-The project contains two main scripts:
+The project contains two main scripts: (that i implemented in one ipynb) 
 
 ```text
-01_discover_simple.py
-02_min_variance_simple.py
+first cell : 01_discover_simple.py
+second cell : 02_min_variance_simple.py
 ```
 
 **01_discover_simple.py**
