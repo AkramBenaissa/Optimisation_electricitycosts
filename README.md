@@ -14,7 +14,7 @@ The analysis focuses on five electricity bidding zones:
 - **NO2:** Southern Norway
 - **SE4:** Southern Sweden
 
-The project is implemented in Python using historical electricity market data collected for my master's thesis.
+The project is implemented in Python using historical electricity market data.
 
 ## Research Objective
 
